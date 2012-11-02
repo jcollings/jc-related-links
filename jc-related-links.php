@@ -34,15 +34,8 @@ class RelatedLinks{
 		new RelatedLinksMeta($this->_core);
 		new RelatedLinksWidget($this->_core);
 		new RelatedLinksSettings($this->_core);
-	}
 
-	/**
-	 * Called on plugin activation
-	 * @return void
-	 */
-	function activate()
-	{
-
+		register_deactivation_hook(__FILE__, array($this, 'deactivation'));
 	}
 
 	/**
@@ -51,7 +44,8 @@ class RelatedLinks{
 	 */
 	function deactivate()
 	{
-
+		// unregister_setting($option_group, $option_name, $sanitize_callback = '')
+		unregister_setting($this->_core->options_group_id, $this->_core->options_group_id);
 	}
 }
 
