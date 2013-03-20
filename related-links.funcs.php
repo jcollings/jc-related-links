@@ -8,6 +8,9 @@ function list_related_posts()
 	$current_post_type = get_post_type();
 	$options = $RelatedLinks->_core->get_options();
 
+	if(!is_array($options[$current_post_type.'_type']))
+		return;
+	
 	$active_post_types = array_keys($options[$current_post_type.'_type'], 'true');
 
 	$pages = $RelatedLinks->_core->get_related_posts($post_id, $active_post_types);
